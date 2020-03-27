@@ -1,16 +1,16 @@
 import * as p5 from "p5"
 
-let heightCanvas = 200
-let widthCanvas = 400
+let heightCanvas = 400
+let widthCanvas = 200
 let s = sk => {
     // field options
 
     // people options
     let people = []
-    let ammountPeople = 80
-    let ammountPeopleSick = 1
+    let ammountPeople = 30
+    let ammountPeopleSick = 10
     let ammountDistancePeople = 0
-    let personScale = 7
+    let personScale = 5
 
     // debug options
     let tries = 0
@@ -26,18 +26,12 @@ let s = sk => {
     let ammountDistancePeopleSlider
 
     // assets
-    let manIcon
-    let sickmanIcon
-    let recoveredmanIcon
-    let deadmanIcon
+    let oldman
 
     function startSim () {
         sk.loop()
-        sk.loop()
         ammountPeople = ammountPeopleSlider.value()
         ammountPeopleSick = ammountPeopleSickSlider.value()
-        ammountDistancePeople = ammountDistancePeopleSlider.value()
-
         tries = 0
         city = new City(people, ammountPeople, ammountPeopleSick, ammountDistancePeople, personScale)
         city.cleanCity()
@@ -50,18 +44,14 @@ let s = sk => {
 
     function generateDOM () {
         restartButton = sk.createButton("REINICIAR SIMULACION")
-        ammountPeopleSlider = sk.createSlider(0, 200, ammountPeople)
+        ammountPeopleSlider = sk.createSlider(0, 100, ammountPeople)
         ammountPeopleSickSlider = sk.createSlider(0, ammountPeople, ammountPeopleSick)
-        ammountDistancePeopleSlider = sk.createSlider(0, ammountPeople, ammountDistancePeople)
 
         restartButton.mousePressed( startSim )
     }
 
     sk.preload = () => {
-        manIcon = sk.loadImage("./assets/manicon.png")
-        sickmanIcon = sk.loadImage("./assets/sickman.png")
-        recoveredmanIcon = sk.loadImage("./assets/recoveredicon.png")
-        deadmanIcon = sk.loadImage("./assets/deadicon.png")
+        oldman = sk.loadImage("./assets/oldman.png")
     }
     
     sk.setup = () => {
@@ -73,7 +63,7 @@ let s = sk => {
     sk.draw = () => {
         city.generateField(heightCanvas, widthCanvas)
         city.updatePeople()
-        city.checkCollide(city.people)
+        city.checkCollide(people)
         city.drawPeople()
         showDebug()
 
@@ -129,25 +119,22 @@ let s = sk => {
         drawPeople () {
             sk.noStroke()
             this.people.forEach(person => {
-                let faceIcon = ""
+                let color = ""
                 if (person.isSick) {
-                    faceIcon = sickmanIcon
+                    color = "red"
                 } else {
                     if (person.isInmune) {
-                        faceIcon = recoveredmanIcon
+                        color = "lightgreen"
                     } else {
-                        if (person.isDead) {
-                            faceIcon = deadmanIcon
-                        } else {
-                            faceIcon = manIcon
-                        }
+                        color = "skyblue"
                     }
                 }
                 // person.isSick?
                 //     sk.fill("red"):
                 //     sk.fill("skyblue")
                 sk.noStroke()
-                sk.image(faceIcon, person.posX, person.posY, person.personScale, person.personScale)
+                sk.fill(color)
+                sk.image(oldman, person.posX, person.posY, person.personScale)
                 // sk.ellipse(person.posX, person.posY, person.personScale, person.personScale)
                 // drawDistance(person, 200, 200)
             })
@@ -164,7 +151,7 @@ let s = sk => {
             const midHeight = heightCanvas / 2
             const midWidth = widthCanvas / 2
             
-            sk.background("grey")
+            sk.background("black")
             sk.strokeWeight(1)
             sk.stroke(50)
             sk.line(midWidth, 0, midWidth, heightCanvas)
@@ -178,6 +165,9 @@ let s = sk => {
                     const person2 = people[index+1]
                     const dist = sk.dist(person.posX, person.posY, person2.posX, person2.posY)
                     if (dist <= (person.personScale + person2.personScale) / 2) {
+                        // person.color = sk.color(sk.random(255), sk.random(255), sk.random(255))
+                        // person.isSick = true
+                        // person2.isSick = true
                         person.changeDir()
                         person2.changeDir()
 
@@ -200,7 +190,7 @@ let s = sk => {
         }
 
         cleanCity () {
-            this.people.length = ammountPeopleSlider.value()
+            this.people = []
         }
     }
     
@@ -211,11 +201,10 @@ let s = sk => {
             this.dayInfected = 0
             this.posX = posX
             this.posY = posY
-            this.velX = (Math.round(Math.random()) * 2 - 1) * 0.5
-            this.velY = (Math.round(Math.random()) * 2 - 1) * 0.5
+            this.velX = Math.round(Math.random()) * 2 - 1
+            this.velY = Math.round(Math.random()) * 2 - 1
             this.personScale = personScale
-            this.isDead = false
-            this.changeOfSurvive = sk.round(sk.random(0, 100))
+            this.color = ""
         }
     
         move () {
@@ -242,7 +231,7 @@ let s = sk => {
         }
     
         gotSick () {
-            if (!(this.isInmune || this.isSick || this.isDead)) {
+            if (!(this.isInmune || this.isSick)) {
                 this.isSick = true
                 this.dayInfected = tries
             }
@@ -253,14 +242,7 @@ let s = sk => {
             if ( this.isSick ) {
                 if ( tries - this.dayInfected >= 480 ) {
                     this.isSick = false
-                    if ( this.changeOfSurvive > 10 ) {
-                        this.isInmune = true
-                    } else {
-                        this.isInmune = false
-                        this.isDead = true
-                        this.velX = 0
-                        this.velY = 0
-                    }
+                    this.isInmune = true
                 }
             }
         }
