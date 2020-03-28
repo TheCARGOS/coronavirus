@@ -6,23 +6,46 @@
     <title>FLU SIMULATOR</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
     <!-- <script src="./sketch.js"></script> -->
-
-    <style>
-        body {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        canvas{
-            padding: 0;
-            margin: 0;
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
-    <div id="app"></div>
+    <header>
+        <img src="./assets/coronaicon.png" alt="">
+        <h1>SIMULADOR ESPARCIMIENTO CORONAVIRUS</h1>
+        <h2>CORONAVIRUS.GITHUB.IO</h2>
+    </header>
+
+    <div id="canvas-container" class="section">
+        <h3><span class="warning-bg">SIN</span> AISLAMIENTO SOCIAL</h3>
+        <!-- <canvas></canvas> -->
+        <p><span id="peopleSPAN1"></span> PERSONAS</p>
+        <p><span id="infectedPeopleSPAN1"></span></span> INFECTADOS</p>
+        <p><span id="notInfectedSPAN1"></span>NO CONTAGIADOS</p>
+        <p><span id="deadPeopleSPAN1"></span> FALLECIDOS</p>
+        <p><span id="recoveredPeopleSPAN1"></span>RECUPERADOS</p>
+    </div>
+
+    <div id="canvas-container2" class="section">
+        <h3><span class="success-bg">CON</span> AISLAMIENTO SOCIAL</h3>
+        <!-- <canvas></canvas> -->
+        <input id="slider-canvas2" type="range" min="1" max="100" value="50" class="slider">
+        <label for="slider-canvas2" >% PERSONAS EN CUARENTENA</label>
+        <p><span id="peopleSPAN2"></span> PERSONAS</p>
+        <p><span id="infectedPeopleSPAN2"></span></span> INFECTADOS</p>
+        <p><span id="notInfectedSPAN2"></span>NO CONTAGIADOS</p>
+        <p><span id="deadPeopleSPAN2"></span> FALLECIDOS</p>
+        <p><span id="recoveredPeopleSPAN2"></span>RECUPERADOS</p>
+    </div>
+
+    <footer class="main-footer">
+        <div class="social-button">
+            <img src="./assets/github.png" alt="">
+            <a href="github.com/TheCARGOS">VER CODIGO</a>
+        </div>
+
+        <div class="social-button">
+            <img src="./assets/messenger.png" alt="">
+            <a href="github.com/TheCARGOS">DAR SUGERENCIA</a>
+        </div>
+    </footer>
 </body>
 </html>
