@@ -413,8 +413,8 @@ class Person {
         this.dayInfected = 0
         this.posX = posX
         this.posY = posY
-        this.velX = (Math.round(Math.random()) * 2 - 1) * 0.5
-        this.velY = (Math.round(Math.random()) * 2 - 1) * 0.5
+        this.velX = (Math.round(Math.random()) * 2 - 1) * 0.8
+        this.velY = (Math.round(Math.random()) * 2 - 1) * 0.8
         this.personScale = personScale
         this.isDead = false
         this.changeOfSurvive = Math.round( Math.random() * 100 )
