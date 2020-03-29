@@ -5,7 +5,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, "./public")
+        path: path.join(__dirname, "./docs")
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -32,7 +32,7 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, './public'),
+        contentBase: path.join(__dirname, './docs'),
         compress: true, 
         port: 9000,
         open: true
