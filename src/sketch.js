@@ -1,18 +1,18 @@
 import * as p5 from "p5"
 
 
-let heightCanvas = 200
-let widthCanvas = 400
+let heightCanvas = 300
+let widthCanvas = 600
 let tries = 0
 let s = sk => {
     // field options
 
     // people options
     let people = []
-    let ammountPeople = 100
+    let ammountPeople = 120
     let ammountPeopleSick = 1
     let ammountDistancePeople = 0
-    let personScale = 7
+    let personScale = 10
 
     // debug options
     let city
@@ -56,7 +56,8 @@ let s = sk => {
     }
 
     function generateDOM () {
-        restartButton = sk.createButton("REINICIAR SIMULACION")
+        // restartButton = sk.createButton("INICIAR")
+        restartButton = document.getElementById("restartButton1")
 
         peopleSPAN1 = document.getElementById("peopleSPAN1")
         infectedPeopleSPAN1 = document.getElementById("infectedPeopleSPAN1")
@@ -65,7 +66,7 @@ let s = sk => {
         recoveredPeopleSPAN1 = document.getElementById("recoveredPeopleSPAN1")
         
 
-        restartButton.mousePressed( startSim )
+        restartButton.addEventListener("click", startSim)
     }
 
     function updateDOM (city) {
@@ -179,10 +180,10 @@ let s2 = sk => {
 
     // people options
     let people = []
-    let ammountPeople = 100
+    let ammountPeople = 120
     let ammountPeopleSick = 1
     let ammountDistancePeople = Math.round(ammountPeople * 0.9)
-    let personScale = 7
+    let personScale = 10
 
     // debug options
     let city
@@ -226,7 +227,8 @@ let s2 = sk => {
     }
 
     function generateDOM () {
-        restartButton = sk.createButton("REINICIAR SIMULACION")
+        // restartButton = sk.createButton("INICIAR")
+        restartButton = document.getElementById("restartButton2")
 
         peopleSPAN2 = document.getElementById("peopleSPAN2")
         infectedPeopleSPAN2 = document.getElementById("infectedPeopleSPAN2")
@@ -235,7 +237,8 @@ let s2 = sk => {
         recoveredPeopleSPAN2 = document.getElementById("recoveredPeopleSPAN2")
         
 
-        restartButton.mousePressed( startSim )
+        // restartButton.mousePressed( startSim )
+        restartButton.addEventListener("click", startSim )
     }
 
     function updateDOM (city) {

@@ -1,0 +1,17 @@
+.advice-container {
+    background-color: rgba($sky-color, 0.23);
+    color: $grey-color;
+    font-style: italic;
+    padding: 20px;
+
+    &__title {
+        font-size: 24px;
+        font-weight: bolder;
+        line-height: 3;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 2;
+    }
+}

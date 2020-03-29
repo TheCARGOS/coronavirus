@@ -1,0 +1,28 @@
+.main-header {
+    padding-top: 5px;
+    border-bottom: 2px solid darkgrey;
+    text-align: center;
+    
+    &__icon {
+        height: 35px;
+        width: 35px;
+        position: absolute;
+        left: 20px;
+    }
+    
+    &__title {
+        font-size: 12px;
+        font-weight: bolder;
+        
+        border-bottom: 1px solid black;
+        padding-bottom: 5px;
+        // border-radius: 5px;
+    }
+    
+    &__subtitle {
+        font-size: 12px;
+        padding-top: 3px;
+        font-weight: bold;
+        overflow: hidden;
+    }
+}

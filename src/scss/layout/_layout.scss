@@ -1,0 +1,108 @@
+/*
+    header
+    sim1
+    sim2
+    footer
+*/
+
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(100%);
+    grid-template-rows: 65px auto auto auto;
+    grid-template-areas: 
+        "main-header"
+        "sim1"
+        "sim2"
+        "main-footer"
+    ;
+    overflow: hidden;
+
+    @media screen and (min-width: 850px) {
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 85px auto auto auto;
+        grid-template-areas: 
+            "main-header main-header"
+            "sim1 right-section"
+            "sim2 right-section"
+            "main-footer main-footer"
+        ;
+
+        img {
+            position: relative;
+            margin-right: 30px;
+        }
+
+        height: 100vh;
+
+    }
+
+}
+
+.main-header {
+    grid-area: main-header;
+}
+
+.p5Canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.sim-container1 {
+    grid-area: sim1;
+}
+
+.sim-contaienr2 {
+    grid-area: sim2;
+}
+
+.sim-container {
+    display: grid;
+    grid-template-areas: "." "canvas" "statistics";
+    overflow: hidden;
+    
+    .p5Canvas {
+        grid-area: canvas;
+    }
+
+    @media screen and (min-width: 850px) {
+        // display: flex;
+        grid-template-columns: repeat(1fr, 1fr);
+        grid-rows : auto 1fr;
+        grid-template-areas: 
+            ". ."
+            "canvas statistics"
+        ;
+
+        &__statistics {
+            grid-area: statistics;
+
+            text-align: left;
+        }
+        
+
+    }
+}
+
+.main-footer {
+    grid-area: main-footer;
+    
+    @media screen and (min-width: 850px) {
+        // position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        overflow: hidden;
+    }
+
+}
+
+.advice-container {
+    display: none;
+    grid-area: right-section;
+
+    @media screen and (min-width: 850px) {
+        display: block;
+        padding: 100px;
+        margin: 150px;
+    }
+}

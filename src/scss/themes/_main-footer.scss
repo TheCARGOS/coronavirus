@@ -1,0 +1,42 @@
+.main-footer {
+    background-color: #CECECE;
+    padding: 10px;
+    height: 50px;
+
+    img {
+        height: 20px;
+        padding-right: 0 10px;
+    }
+
+    .social-button {
+        font-size: 10px;
+        margin: 0 10px;
+        padding: 7px 14px;
+
+        & > * {
+            margin: 0 8px;
+        }
+
+        &:first-child {
+            color: #303030;
+            border: 1px solid #303030;
+
+            &:hover {
+                background-color: #303030;
+                color: white;
+                box-shadow: 0 0 5px black;
+            }
+        }
+
+        &:nth-child(2) {
+            color: white;
+            background-color: #55A3F1;
+            &:hover {
+                background-color:  rgb(20, 129, 238);
+                color: white;
+                box-shadow: 0 0 5px rgb(20, 129, 238);
+         
+            }
+        }
+    }
+}

@@ -3,14 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLU SIMULATOR</title>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.min.js"></script>
-    <script src="./sketch.js"></script>
+    <title>SIMULADOR CORONAVIRUS</title>
+    <link rel="icon" href="./assets/coronaicon.png">
+
 </head>
 <body>
-    <h1>FLU SIMULATOR</h1>
-    <h3>ARE YOU READY?</h3>
+    <div class="main-container">
+        <header class="main-header flex-container">
+            <img class="main-header__icon" src="./assets/coronaicon.png" alt="">
+            <div class="flex-column">
+                <h1 class="main-header__title">SIMULADOR ESPARCIMIENTO CORONAVIRUS</h1>
+                <h2 class="main-header__subtitle">CORONAVIRUS.GITHUB.IO</h2>
+            </div>
+        </header>
+    
+        <div id="canvas-container" class="section sim-container sim-container--1" >
+            <div class="flex-container" style="justify-content: space-between">
+                <h3 class="sim-container__title"><span class="warning-bg">SIN</span> AISLAMIENTO SOCIAL</h3>
+                <button id="restartButton1" class="flex-container">
+                    <img src="./assets/playicon.png" style="height: 15px;"></img>
+                    INICIAR
+                </button>
+            </div>
+            <!-- <canvas></canvas> -->
+            <div class="sim-container__statistics">
+                <div class="flex-column">
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/manIcon.png" alt="">
+                        <p><span id="peopleSPAN1"></span> PERSONAS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/sickman.png" alt="">
+                        <p><span id="infectedPeopleSPAN1"></span></span> INFECTADOS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/manIcon.png" alt="">
+                        <p><span id="notInfectedSPAN1"></span>NO CONTAGIADOS</p>                        
+                    </div>
+                </div>
+                <div class="flex-column">
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/recoveredicon.png" alt="">
+                        <p><span id="recoveredPeopleSPAN1"></span>RECUPERADOS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/deadicon.png" alt="">
+                        <p><span id="deadPeopleSPAN1"></span> FALLECIDOS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="canvas-container2" class="section sim-container sim-container--2">
+            <div class="flex-container" style="justify-content: space-between">
+                <h3 class="sim-container__title"><span class="success-bg">CON</span> AISLAMIENTO SOCIAL</h3>
+                <button id="restartButton2" class="flex-container">
+                    <img src="./assets/playicon.png" style="height: 15px;"></img>
+                    INICIAR
+                </button>
+            </div>
+            <!-- <canvas></canvas> -->
+            <div class="flex-column">
+                <input id="slider-canvas2" type="range" min="1" max="120" value="90" class="slider">
+                <label for="slider-canvas2" class="sim-container__subtitle" style="overflow: hidden;">% PERSONAS INMOVILIZADAS</label>
+            </div>
+            <div class="sim-container__statistics">
+                <div class="flex-column">
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/manIcon.png" alt="">
+                        <p><span id="peopleSPAN2"></span> PERSONAS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/sickman.png" alt="">
+                        <p><span id="infectedPeopleSPAN2"></span></span> INFECTADOS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/manIcon.png" alt="">
+                        <p><span id="notInfectedSPAN2"></span>NO CONTAGIADOS</p>                        
+                    </div>
+                </div>
+                <div class="flex-column">
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/recoveredicon.png" alt="">
+                        <p><span id="recoveredPeopleSPAN2"></span>RECUPERADOS</p>
+                    </div>
+                    <div class="sim-container__statistics__data flex-container">
+                        <img src="./assets/deadicon.png" alt="">
+                        <p><span id="deadPeopleSPAN2"></span> FALLECIDOS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <footer class="main-footer flex-container">
+            <a href="https://github.com/TheCARGOS/coronavirus.git" class="social-button flex-container">
+                <img src="./assets/github.png" alt="">
+                VER CODIGO
+            </a>
+    
+            <a href="https://www.messenger.com/t/carlos.loayza.5" class="social-button flex-container">
+                <img src="./assets/messenger.png" alt="">
+                DAR SUGERENCIA
+            </a>
+        </footer>
 
-    <span>LET'S START THIS FUCKING SHIT! :D</span>
-<script type="text/javascript" src="sketch.js"></script></body>
+        <section class="advice-container">
+            <h1 class="advice-container__title">PREVENCIÓN</h1>
+            <p>Los espacialistas en salud han alentado a las personas a evitar reuniones públicas, quedarse en casa con más frecuencia y Mantener su distancia de los demás. Si las personas son menos móvil e interactuar entre  sí menos, el virus tiene menos oportunidades de  propagarse.</p>
+            <img src="./assets/proteccion-icon.png" alt="">
+        </section>
+    </div>
+
+<script type="text/javascript" src="bundle.js"></script></body>
 </html>
