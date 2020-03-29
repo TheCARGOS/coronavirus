@@ -98,6 +98,7 @@ let s = sk => {
         generateDOM()
         cleanDOM()
         startSim()
+        endSim()
     }
 
     sk.draw = () => {
@@ -270,6 +271,7 @@ let s2 = sk => {
         generateDOM()
         cleanDOM()
         startSim()
+        endSim()
     }
 
     sk.draw = () => {
