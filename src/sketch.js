@@ -11,178 +11,6 @@ let s = sk => {
     let people = []
     let ammountPeople = 120
     let ammountPeopleSick = 1
-    let ammountDistancePeople = 0
-    let personScale = 10
-
-    // debug options
-    let city
-
-    // global settings
-    // let currentDays = sk.round( sk.millis() / 1000 )
-
-    // DOM options
-    let restartButton
-    let peopleSPAN1
-    let infectedPeopleSPAN1
-    let notInfectedSPAN1
-    let deadPeopleSPAN1
-    let recoveredPeopleSPAN1
-
-//     id="peopleSPAN1"></span> PE
-// id="infectedPeopleSPAN1"></
-// id="notInfectedSPAN1"></spa
-// id="deadPeopleSPAN1"></span
-// id="recoveredPeopleSPAN1"><
-
-    // assets
-    let manIcon
-    let sickmanIcon
-    let recoveredmanIcon
-    let deadmanIcon
-
-    function startSim () {
-        sk.loop()
-        sk.loop()
-
-
-        tries = 0
-        city = new City(people, ammountPeople, ammountPeopleSick, ammountDistancePeople, personScale)
-        city.cleanCity()
-        city.generatePeople()
-    }
-
-    function endSim () {
-        sk.noLoop()
-    }
-
-    function generateDOM () {
-        // restartButton = sk.createButton("INICIAR")
-        restartButton = document.getElementById("restartButton1")
-
-        peopleSPAN1 = document.getElementById("peopleSPAN1")
-        infectedPeopleSPAN1 = document.getElementById("infectedPeopleSPAN1")
-        notInfectedSPAN1 = document.getElementById("notInfectedSPAN1")
-        deadPeopleSPAN1 = document.getElementById("deadPeopleSPAN1")
-        recoveredPeopleSPAN1 = document.getElementById("recoveredPeopleSPAN1")
-        
-
-        restartButton.addEventListener("click", startSim)
-    }
-
-    function updateDOM (city) {
-        peopleSPAN1.innerHTML = city.people.length
-        infectedPeopleSPAN1.innerHTML = city.people.filter(person => person.isSick).length
-        notInfectedSPAN1.innerHTML = city.people.filter(person => !(person.isSick || person.isInmune || person.isDead)).length
-        deadPeopleSPAN1.innerHTML = city.people.filter(person => person.isDead).length
-        recoveredPeopleSPAN1.innerHTML = city.people.filter(person => person.isInmune).length
-    }
-
-    function cleanDOM () {
-        peopleSPAN1.innerHTML = ""
-        infectedPeopleSPAN1.innerHTML = ""
-        notInfectedSPAN1.innerHTML = ""
-        deadPeopleSPAN1.innerHTML = ""
-        recoveredPeopleSPAN1.innerHTML = ""
-    }
-
-
-    sk.preload = () => {
-        manIcon = sk.loadImage("./assets/manicon.png")
-        sickmanIcon = sk.loadImage("./assets/sickman.png")
-        recoveredmanIcon = sk.loadImage("./assets/recoveredicon.png")
-        deadmanIcon = sk.loadImage("./assets/deadicon.png")
-    }
-    
-    sk.setup = () => {
-        sk.createCanvas(widthCanvas, heightCanvas)
-        generateDOM()
-        cleanDOM()
-        startSim()
-        endSim()
-    }
-
-    sk.draw = () => {
-        generateField(heightCanvas, widthCanvas)
-        city.updatePeople()
-        checkCollide(city)
-        drawPeople(city)
-        updateDOM(city)
-        showDebug()
-
-        tries++
-
-        city.isAnySick()?
-            "":
-            endSim()
-    }
-    
-    function showDebug () {
-        const DEBUG_MESSAGE = `MOVES MADE: ${tries}`
-        sk.fill("white")
-        sk.text(DEBUG_MESSAGE, 50, 50, 100, 50)
-    }
-
-    function drawPeople (city) {
-        sk.noStroke()
-        city.people.forEach(person => {
-            let faceIcon = ""
-            if (person.isSick) {
-                faceIcon = sickmanIcon
-            } else {
-                if (person.isInmune) {
-                    faceIcon = recoveredmanIcon
-                } else {
-                    if (person.isDead) {
-                        faceIcon = deadmanIcon
-                    } else {
-                        faceIcon = manIcon
-                    }
-                }
-            }
-            sk.noStroke()
-            sk.image(faceIcon, person.posX, person.posY, person.personScale, person.personScale)
-        })
-    }
-
-    function generateField (heightCanvas, widthCanvas) {
-        const midHeight = heightCanvas / 2
-        const midWidth = widthCanvas / 2
-        
-        sk.background("black")
-        sk.strokeWeight(1)
-        sk.stroke(50)
-        sk.line(midWidth, 0, midWidth, heightCanvas)
-        sk.stroke(50)
-        sk.line(0, midHeight, widthCanvas, midHeight)
-    }
-
-    function checkCollide (city) {
-        city.people.forEach((person, index) => {
-            while (index < city.people.length-1) {
-                const person2 = people[index+1]
-                const dist = sk.dist(person.posX, person.posY, person2.posX, person2.posY)
-                if (dist <= (person.personScale + person2.personScale) / 2) {
-                    person.changeDir()
-                    person2.changeDir()
-
-                    if ( person.isSick || person2.isSick ) {
-                        person.gotSick()
-                        person2.gotSick()
-                    }
-                }
-                index++
-            }
-        })
-    }
-}
-
-let s2 = sk => {
-    // field options
-
-    // people options
-    let people = []
-    let ammountPeople = 120
-    let ammountPeopleSick = 1
     let ammountDistancePeople = Math.round(ammountPeople * 0.9)
     let personScale = 10
 
@@ -193,12 +21,15 @@ let s2 = sk => {
     // let currentDays = sk.round( sk.millis() / 1000 )
 
     // DOM options
+    let DOMproject = 1
     let restartButton
-    let peopleSPAN2
-    let infectedPeopleSPAN2
-    let notInfectedSPAN2
-    let deadPeopleSPAN2
-    let recoveredPeopleSPAN2
+    let peopleSPAN
+    let infectedPeopleSPAN
+    let notInfectedSPAN
+    let deadPeopleSPAN
+    let recoveredPeopleSPAN
+
+    let pseudoSlider
 
     let slider = document.getElementById("slider-canvas2")
 
@@ -215,9 +46,13 @@ let s2 = sk => {
         // ammountPeople = ammountPeopleSlider.value()
         // ammountPeopleSick = ammountPeopleSickSlider.value()
         // ammountDistancePeople = ammountDistancePeopleSlider.value()
-        ammountDistancePeople = slider.value
 
         tries = 0
+        if (getDOMProject == 1) {
+            ammountDistancePeople = 0
+        } else {
+            ammountDistancePeople = pseudoSlider.value
+        }
         city = new City(people, ammountPeople, ammountPeopleSick, ammountDistancePeople, personScale)
         city.cleanCity()
         city.generatePeople()
@@ -227,35 +62,36 @@ let s2 = sk => {
         sk.noLoop()
     }
 
-    function generateDOM () {
+    function generateDOM (DOMproject) {
         // restartButton = sk.createButton("INICIAR")
-        restartButton = document.getElementById("restartButton2")
-
-        peopleSPAN2 = document.getElementById("peopleSPAN2")
-        infectedPeopleSPAN2 = document.getElementById("infectedPeopleSPAN2")
-        notInfectedSPAN2 = document.getElementById("notInfectedSPAN2")
-        deadPeopleSPAN2 = document.getElementById("deadPeopleSPAN2")
-        recoveredPeopleSPAN2 = document.getElementById("recoveredPeopleSPAN2")
         
+        restartButton = document.getElementById(`restartButton${DOMproject}`)
+
+        peopleSPAN = document.getElementById(`peopleSPAN${DOMproject}`)
+        infectedPeopleSPAN = document.getElementById(`infectedPeopleSPAN${DOMproject}`)
+        notInfectedSPAN = document.getElementById(`notInfectedSPAN${DOMproject}`)
+        deadPeopleSPAN = document.getElementById(`deadPeopleSPAN${DOMproject}`)
+        recoveredPeopleSPAN = document.getElementById(`recoveredPeopleSPAN${DOMproject}`)
 
         // restartButton.mousePressed( startSim )
         restartButton.addEventListener("click", startSim )
     }
 
     function updateDOM (city) {
-        peopleSPAN2.innerHTML = city.people.length
-        infectedPeopleSPAN2.innerHTML = city.people.filter(person => person.isSick).length
-        notInfectedSPAN2.innerHTML = city.people.filter(person => !(person.isSick || person.isInmune || person.isDead)).length
-        deadPeopleSPAN2.innerHTML = city.people.filter(person => person.isDead).length
-        recoveredPeopleSPAN2.innerHTML = city.people.filter(person => person.isInmune).length
+
+        peopleSPAN.innerHTML = city.people.length
+        infectedPeopleSPAN.innerHTML = city.people.filter(person => person.isSick).length
+        notInfectedSPAN.innerHTML = city.people.filter(person => !(person.isSick || person.isInmune || person.isDead)).length
+        deadPeopleSPAN.innerHTML = city.people.filter(person => person.isDead).length
+        recoveredPeopleSPAN.innerHTML = city.people.filter(person => person.isInmune).length
     }
 
     function cleanDOM () {
-        peopleSPAN2.innerHTML = ""
-        infectedPeopleSPAN2.innerHTML = ""
-        notInfectedSPAN2.innerHTML = ""
-        deadPeopleSPAN2.innerHTML = ""
-        recoveredPeopleSPAN2.innerHTML = ""
+        peopleSPAN.innerHTML = ""
+        infectedPeopleSPAN.innerHTML = ""
+        notInfectedSPAN.innerHTML = ""
+        deadPeopleSPAN.innerHTML = ""
+        recoveredPeopleSPAN.innerHTML = ""
     }
 
 
@@ -267,8 +103,9 @@ let s2 = sk => {
     }
     
     sk.setup = () => {
-        sk.createCanvas(widthCanvas, heightCanvas)
-        generateDOM()
+        const canvas = sk.createCanvas(widthCanvas, heightCanvas)
+        pseudoSlider = canvas.elt.parentElement.childNodes[5].childNodes[1]
+        generateDOM(getDOMProject())
         cleanDOM()
         startSim()
         endSim()
@@ -326,6 +163,14 @@ let s2 = sk => {
         })
     }
 
+    function getDOMProject () {
+        if (pseudoSlider.tagName === "INPUT") {
+            return DOMproject = 2
+        } else {
+            return DOMproject = 1
+        }
+    }
+
     function generateField (heightCanvas, widthCanvas) {
         const midHeight = heightCanvas / 2
         const midWidth = widthCanvas / 2
@@ -357,6 +202,8 @@ let s2 = sk => {
         })
     }
 }
+
+
 
 class City {
     constructor (people, ammountPeople, ammountPeopleSick, ammountDistancePeople, personScale) {
@@ -472,7 +319,7 @@ class Person {
 
 
 const P5 = new p5(s, "canvas-container")
-const P6 = new p5(s2, "canvas-container2")
+const P6 = new p5(s, "canvas-container2")
 
 
 export default {P5, P6}
